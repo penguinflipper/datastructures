@@ -1,4 +1,4 @@
-public class keyValuePair<K, V> {
+public class keyValuePair<K extends Comparable<K>, V> implements Comparable<keyValuePair<K, V>> {
     
     private K key;
     private V value;
@@ -26,6 +26,19 @@ public class keyValuePair<K, V> {
 
     public void print() {
         System.out.println(String.format("Key: %s, Value: %s", this.key, this.value));
+    }
+
+    @Override
+    public int compareTo(keyValuePair<K, V> o) {
+        
+        if (this.key.compareTo(o.getKey()) < 0) {
+            return -1;
+        } else if (this.key.compareTo(o.getKey()) == 0) {
+            return 0;
+        } else {
+            return 1;
+        }
+
     }
 
 }
