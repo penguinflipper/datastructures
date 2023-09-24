@@ -2,9 +2,10 @@ public class tester {
     
     public static void main(String args[]) {
 
-        valsListTest();
-        kvListTest();
-
+        // valsListTest();
+        // kvListTest();
+        // queueTest();
+        kvQueueTest();
     }
 
     public static void valsListTest() {
@@ -49,4 +50,44 @@ public class tester {
         // v.print();
     }
 
+    public static void queueTest() {
+        queue<Integer> arr = new queue<>();
+        
+        arr.enqueue(4);
+        arr.enqueue(6);
+        arr.enqueue(1);
+        arr.enqueue(5);
+        arr.enqueue(3);
+        arr.print();
+        arr.enqueue(7);
+        arr.enqueue(1);
+        arr.enqueue(5);
+        arr.enqueue(2);
+        arr.print();
+        
+        arr.dequeue();
+        arr.dequeue();
+        arr.dequeue();
+        arr.print();
+        System.out.println(arr.peek());
+        
+    }
+
+    public static void kvQueueTest() {
+        queue<keyValuePair<String, Integer>> arr = new queue<keyValuePair<String, Integer>>();
+
+        for (int i = 9; i > 0; i--) {
+            keyValuePair<String, Integer> x = new keyValuePair<String,Integer>(String.valueOf(i), i*i);
+            arr.enqueue(x);
+        }
+
+        arr.print();
+        // arr.sort();
+        // arr.print();
+        arr.dequeue();
+        arr.peek().print();
+        arr.dequeue();
+        arr.print();
+        arr.peek().print();
+    }
 }

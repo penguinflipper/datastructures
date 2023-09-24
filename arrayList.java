@@ -4,10 +4,9 @@ import java.util.Arrays;
 
 public class arrayList<E extends Comparable<E>> {
 
-    public int capacity = 1;
+    private int capacity = 1;
     private Object[] arr = new Object[this.capacity];
-    public int tail = 0;
-    private int holding = 0;
+    private int tail = 0;
 
     public arrayList() {}
 
@@ -23,7 +22,7 @@ public class arrayList<E extends Comparable<E>> {
             this.capacity++;
             Object[] clonedArr = new Object[this.capacity];
             
-            for (int i = 0; i < this.holding; i++) {
+            for (int i = 0; i < this.tail; i++) {
                 clonedArr[i] = this.arr[i];
             }
             
@@ -34,7 +33,6 @@ public class arrayList<E extends Comparable<E>> {
     public void push(E val) {
         this.arr[this.tail] = val;
         this.tail += 1;
-        this.holding += 1;
 
         
         expandArr();
@@ -43,33 +41,52 @@ public class arrayList<E extends Comparable<E>> {
     public E pop() {
         E v = (E) this.arr[this.tail - 1];
         this.arr[this.tail - 1] = null;
-        this.tail -= 1;
-        this.holding -= 1;
+        this.tail--;
         return v;
     }
 
+    public E pop(int index) {
 
-    public E get(int i) {
-        if (i < this.holding) {
-            return (E) this.arr[i];
+        if (index < 0 || index >= this.tail) {
+            return null;
+        }
+
+        Object[] newArr = new Object[this.tail - 1];
+        E v = (E) this.arr[index];
+        for (int i = 0; i < this.tail; i++) {
+            if (index != i) {
+                newArr[i] = this.arr[i];
+            }
+        }
+        this.arr = newArr;
+        this.tail--;
+
+        return v;
+
+    }
+
+
+    public E get(int index) {
+        if (index < this.tail) {
+            return (E) this.arr[index];
         }
         return null;
     }
 
     public int size() {
-        return this.holding;
+        return this.tail;
     }
 
     public void print() {
         String s = "[";
         
-        for (int i = 0; i < this.holding; i++) {
+        for (int i = 0; i < this.tail; i++) {
             if (this.arr[i] != null) {
                 s += this.arr[i].toString();
             } else {
                 s += "null";
             }
-            if (i < this.holding - 1) {
+            if (i < this.tail - 1) {
                 s += ", ";
             }
         }
